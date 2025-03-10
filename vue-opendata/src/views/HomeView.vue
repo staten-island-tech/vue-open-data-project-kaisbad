@@ -4,7 +4,7 @@ const covidlist = ref('')
 async function covidData() {
   let results = await fetch('https://data.cityofnewyork.us/resource/rc75-m7u3.json')
   let data = await results.json()
-  covidlist.value = data.results
+  covidlist.value = data
 }
 onMounted(() => {
   covidData()
@@ -13,6 +13,6 @@ onMounted(() => {
 
 <template>
   <main>
-    <TheWelcome />
+    <h1>{{ covidlist.case_count }}</h1>
   </main>
 </template>
