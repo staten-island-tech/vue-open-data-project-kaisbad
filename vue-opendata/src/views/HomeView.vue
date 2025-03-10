@@ -1,4 +1,14 @@
 <script setup>
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+} from 'chart.js'
+import { Bar } from 'vue-chartjs'
 import { ref, onMounted } from 'vue'
 const covidlist = ref([])
 async function covidData() {
