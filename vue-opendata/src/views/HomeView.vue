@@ -1,15 +1,7 @@
 <script setup>
-import {
-  Chart as ChartJS,
-  Title,
-  Tooltip,
-  Legend,
-  BarElement,
-  CategoryScale,
-  LinearScale,
-} from 'chart.js'
-import { Bar } from 'vue-chartjs'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
+import CovidChart from './components/CovidChart.vue'
+
 const covidlist = ref([])
 async function covidData() {
   try {
@@ -25,9 +17,31 @@ async function covidData() {
 onMounted(() => {
   covidData()
 })
+
+const chartData = computed(() => {
+  return {
+    labels: covidlist.value.map((item) => item.date_of_interest),
+    datasets: [
+      {
+        label: 'COVID Case Counts',
+        backgroundColor: '#f87979',
+        data: covidlist.value.map((item) => item.case_count),
+      },
+    ],
+  }
+})
 </script>
 
 <template>
+  <main>
+    <h1>COVID Case Counts</h1>
+    <div v-if="covidlist.length">
+      <CovidChart :chartData="chartData" />
+    </div>
+    <p v-else>Loading data...</p>
+  </main>
+</template>
+<!-- <template>
   <main>
     <h1>COVID Case Counts</h1>
     <div v-if="covidlist.length">
@@ -38,3 +52,4 @@ onMounted(() => {
     <p v-else>Loading data...</p>
   </main>
 </template>
+ -->
