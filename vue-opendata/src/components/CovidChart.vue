@@ -5,9 +5,8 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted } from 'vue'
 import { Chart, registerables } from 'chart.js'
-import { Bar } from 'vue-chartjs'
 
 Chart.register(...registerables)
 
@@ -21,19 +20,8 @@ const props = defineProps({
 const chart = ref(null)
 
 onMounted(() => {
-  renderChart()
-})
-
-watch(
-  () => props.chartData,
-  () => {
-    renderChart()
-  },
-)
-
-function renderChart() {
-  if (chart.value) {
-    new Chart(chart.value, {
+  if (chart.value && props.chartData) {
+    chartInstance = new Chart(chart.value, {
       type: 'bar',
       data: props.chartData,
       options: {
@@ -47,5 +35,5 @@ function renderChart() {
       },
     })
   }
-}
+})
 </script>

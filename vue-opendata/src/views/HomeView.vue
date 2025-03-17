@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
-import CovidChart from './components/CovidChart.vue'
+import CovidChart from '@/components/CovidChart.vue'
 
 const covidlist = ref([])
 async function covidData() {
@@ -38,7 +38,6 @@ const chartData = computed(() => {
     <div v-if="covidlist.length">
       <CovidChart :chartData="chartData" />
     </div>
-    <p v-else>Loading data...</p>
   </main>
 </template>
 <!-- <template>
