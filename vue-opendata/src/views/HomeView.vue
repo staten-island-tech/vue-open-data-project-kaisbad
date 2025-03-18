@@ -34,8 +34,8 @@ const chartData = computed(() => {
 
 <template>
   <main>
-    <h1>COVID Case Counts</h1>
-    <div v-if="covidlist.length">
+    <h1 class="text-4xl">COVID Case Counts</h1>
+    <div class="h-450px" v-if="covidlist.length">
       <CovidChart :chartData="chartData" />
     </div>
   </main>

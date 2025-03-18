@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="cart-container min-h-full">
     <canvas ref="chart"></canvas>
   </div>
 </template>
