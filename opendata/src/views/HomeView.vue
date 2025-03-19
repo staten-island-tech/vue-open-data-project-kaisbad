@@ -5,7 +5,9 @@ import CovidChart from '@/components/CovidChart.vue'
 const covidlist = ref([])
 async function covidData() {
   try {
-    let results = await fetch('https://data.cityofnewyork.us/resource/rc75-m7u3.json')
+    let results = await fetch(
+      'https://data.cityofnewyork.us/resource/rc75-m7u3.json?$limit=70&$offset=640',
+    )
     let data = await results.json()
     covidlist.value = data
     console.log(data)
@@ -18,7 +20,7 @@ onMounted(() => {
   covidData()
 })
 
-const chartData = computed(() => {
+/* const chartData = computed(() => {
   return {
     labels: covidlist.value.map((item) => item.date_of_interest),
     datasets: [
@@ -29,7 +31,27 @@ const chartData = computed(() => {
       },
     ],
   }
-})
+}) */
+
+const chartData = computed(() => ({
+  labels: covidlist.value.map((item) => item.date_of_interest),
+  datasets: [
+    {
+      label: 'COVID Case Counts',
+      backgroundColor: '#f87979',
+      data: covidlist.value.map((item) => item.case_count),
+    },
+    {
+      label: 'COVID Death Counts',
+      backgroundColor: '#7979F8', // A contrasting color
+      data: covidlist.value.map((item) => item.death_count),
+      type: 'line', // Make this a line on top of the bar chart
+      borderColor: '#7979F8',
+      borderWidth: 2,
+      fill: false,
+    },
+  ],
+}))
 </script>
 
 <template>

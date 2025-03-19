@@ -21,6 +21,7 @@ const chart = ref(null)
 
 onMounted(() => {
   if (chart.value && props.chartData) {
+    chart.value.height = 400
     chartInstance = new Chart(chart.value, {
       type: 'bar',
       data: props.chartData,
