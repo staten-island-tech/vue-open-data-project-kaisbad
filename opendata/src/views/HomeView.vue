@@ -42,12 +42,10 @@ const chartData = computed(() => ({
       data: covidlist.value.map((item) => item.case_count),
     },
     {
-      label: 'COVID Death Counts',
+      label: '7 Day Average',
       backgroundColor: '#7979F8', // A contrasting color
-      data: covidlist.value.map((item) => item.death_count),
-      type: 'line', // Make this a line on top of the bar chart
+      data: covidlist.value.map((item) => item.case_count_7day_avg),
       borderColor: '#7979F8',
-      borderWidth: 2,
       fill: false,
     },
   ],
